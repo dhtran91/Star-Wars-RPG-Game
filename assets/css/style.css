@@ -1,0 +1,31 @@
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.character-img {
+    height: 100px;
+    width: 100%;
+    margin: auto;
+}
+
+.star-wars-character {
+    margin: 5px;
+    border: 2px green solid;
+    background: white;
+    color: black;
+}
+
+#character-selection>.star-wars-character:hover {
+    border: 2px red solid;
+}
+
+#pic01 {
+    width: 100%; height: 500px; margin: 0 auto;
+}
+
+button {
+    background: black;
+}
+
+button:hover {
+    background: red;
+}

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Star Wars RPG Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
+
+</head>
+
+<body style="background: url('https://i1.wp.com/www.pixelstalk.net/wp-content/uploads/2016/05/Death-Star-Wallpaper-by-ezio.jpg') no-repeat fixed; background-size: cover; color:white;">
+    
+        <div class="container">
+            <h1 style="text-align: center">Star Wars RPG</h1>
+            <img id="pic01" src='https://wallpapertag.com/wallpaper/full/b/1/f/401589-star-wars-desktop-backgrounds-1920x1080-for-mobile.jpg'>
+            
+            <h4>Select A Character</h4>
+
+            <div id="character-selection" class="container"></div>
+    
+            <h4>Your Character</h4>
+    
+            <div id="myCharacter" class="container"></div>
+    
+            <h4>Enemies Avaiable To Attack</h4>
+    
+            <div class="container" id="enemy"></div>
+    
+            <h4>Fight Section</h4>
+    
+            <button id="attack">Attack</button>
+    
+            <h4>Defender</h4>
+    
+            <div id="defender" class="container"></div>
+    
+            <div id="attack-text" class="container"></div>
+        </div>
+
+        
+
+         
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+
+
+            var character = [
+                obiWan = {
+                    name: "Obi-Wan Kenobi",
+                    hp: 120,
+                    atkPower: 15,
+                    level: 1,
+                    image: "https://nerdist.com/wp-content/uploads/2017/12/download.jpg"
+                },
+                lukeSkywalker = {
+                    name: "Luke Skywalker",
+                    hp: 110,
+                    atkPower: 10,
+                    level: 1,
+                    image: "https://i2-prod.mirror.co.uk/incoming/article9603913.ece/ALTERNATES/s1200/PROD-Luke-Skywalker-in-Star-Wars-film.jpg"
+                },
+                darthSidious = {
+                    name: "Darth Sidious",
+                    hp: 150,
+                    atkPower: 20,
+                    level: 1,
+                    image: "https://d1nao0k9edgivc.cloudfront.net/wp-content/uploads/2013/03/Star-Wars-Palpatine-solo-movie.jpg"
+                },
+                darthMaul = {
+                    name: "Darth Maul",
+                    hp: 170,
+                    atkPower: 25,
+                    level: 1,
+                    image: "https://www.sideshowtoy.com/wp-content/uploads/2015/10/star-wars-darth-maul-sixth-scale-feature-100156.jpg"
+                }
+            ]
+
+            for (var i = 0; i < character.length; i++) {
+                var colDiv = $("<div>").addClass("col-md-2 col-sm-4 col-xs-7 star-wars-character select-character");
+                colDiv.prop({
+                    "name": character[i].name,
+                    "hp": character[i].hp,
+                    "atkPower": character[i].atkPower,
+                    "level": character[i].level
+                });
+                var nameDiv = $("<div>").addClass("row text-center name").text(character[i].name);
+                var hpDiv = $("<div>").addClass("row text-center hp").text(character[i].hp);
+
+                var img = $("<img>").addClass("character-img").attr("src", character[i].image);
+                var atkDiv = $("<div>").addClass("row text-center atk").text(character[i].atkPower);
+                $("#character-selection").append(colDiv);
+                var imgDiv = $("<div>").addClass("row text-center").append(img);
+                $(colDiv).append(nameDiv, hpDiv, imgDiv, atkDiv);
+            }
+
+            function hits(playerOne) {
+                for (var i = 1; i <= click; i++) {
+                    hit = playerOne.prop("atkPower") * i;
+                }
+                return hit;
+            }
+
+            function counterHit(comp) {
+                return comp.prop("atkPower");
+            }
+
+            //Phases of the game
+            var isCharacterSelected = false;
+            var isEnemyPicked = false;
+            var playerOne = "";
+            var computer = "";
+            var click = 1;
+
+            function reset() {
+                
+                    var isCharacterSelected = false;
+                    var isEnemyPicked = false;
+                    var playerOne = "";
+                    var computer = "";
+                    var click = 1;
+
+                    $(".container").empty();
+                    
+                    
+                    // for (var i = 0; i < character.length; i++) {
+                    //     var colDiv = $("<div>").addClass("col-md-2 star-wars-character select-character");
+                    //     colDiv.prop({
+                    //         "name": character[i].name,
+                    //         "hp": character[i].hp,
+                    //         "atkPower": character[i].atkPower,
+                    //         "level": character[i].level
+                    //         });
+                    //     var nameDiv = $("<div>").addClass("row text-center name").text(character[i].name);
+                    //     var hpDiv = $("<div>").addClass("row text-center hp").text(character[i].hp);
+
+                    //     var img = $("<img>").addClass("character-img").attr("src", character[i].image);
+                    //     var atkDiv = $("<div>").addClass("row text-center atk").text(character[i].atkPower);
+                    //     $("#character-selection").append(colDiv);
+                    //     var imgDiv = $("<div>").addClass("row text-center").append(img);
+                    //     $(colDiv).append(nameDiv, hpDiv, imgDiv, atkDiv);
+                        
+                    // }
+                }
+
+            $(document).on("click", ".select-character", function () {
+                if (isCharacterSelected != true) {
+                    $('#myCharacter').append($(this));
+                    $(this).removeClass("select-character");
+                    $(this).addClass("selected-character");
+                    playerOne = $(this);
+                    $('#enemy').append($("#character-selection"));
+                    isCharacterSelected = true;
+                } else if (isCharacterSelected && isEnemyPicked != true) {
+                    $("#defender").append($(this));
+                    $(this).addClass("selected-enemy");
+                    computer = $(this);
+                    isEnemyPicked = true;
+                    $("#attack-text").text("");
+                }
+            });
+
+
+            $(document).on("click", "#attack", function () {
+                if (isCharacterSelected && isEnemyPicked) {
+
+                    counter = counterHit(computer);
+                    hit = hits(playerOne);
+                    click++;
+
+                    playerOneHp = playerOne.prop("hp") - counter;
+                    computerHp = computer.prop("hp") - hit;
+
+                    playerOne.prop("hp", playerOneHp);
+                    computer.prop("hp", computerHp);
+
+                    $("#attack-text").text("You did " + hit + " damage to " + computer.prop("name") + " and he now has " + computerHp + " hp left. " + computer.prop("name") + " did " + counter + " damage to you and you now have " + playerOneHp + ".");
+                    $(".selected-character>.hp").text(playerOneHp);
+                    $(".selected-enemy>.hp").text(computerHp);
+
+                    if (playerOne.prop("hp") <= 0) {
+                        confirm("Game Over! Play again?");
+                        reset();
+
+                    } else if (computer.prop("hp") <= 0) {
+                        $("#defender").empty();
+                        playerOne.prop("level", playerOne.prop("level") + 1);
+                        isEnemyPicked = false;
+                    }
+                    if (playerOne.prop("level") === character.length) {
+                        confirm("You Won! Play again?");
+                        reset();
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
