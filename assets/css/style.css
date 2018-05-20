@@ -14,18 +14,6 @@ body {
     color: black;
 }
 
-#character-selection>.star-wars-character:hover {
-    border: 2px red solid;
-}
-
 #pic01 {
     width: 100%; height: 500px; margin: 0 auto;
-}
-
-button {
-    background: black;
-}
-
-button:hover {
-    background: red;
 }
